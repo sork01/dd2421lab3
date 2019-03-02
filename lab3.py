@@ -44,7 +44,9 @@ def computePrior(labels, W=None):
 
     # TODO: compute the values of prior for each class!
     # ==========================
-    
+    for jdx, c in enumerate(classes):
+        idx = np.where(labels == c)[0]
+        prior[jdx] = len(idx) / len(labels)
     # ==========================
 
     return prior
@@ -92,22 +94,20 @@ def classifyBayes(X, prior, mu, sigma):
 
     Npts = X.shape[0]
     Nclasses,Ndims = np.shape(mu)
-    classes = np.unique(labels)
     logProb = np.zeros((Nclasses, Npts))
 
     # TODO: fill in the code to compute the log posterior logProb!
     # ==========================
     #
-
     for jdx in range(Nclasses):
-        p1 = (-1/2) * np.log(np.linalg.det(sigma[jdx]))
+        halfdet = (-1/2) * np.log(np.linalg.det(sigma[jdx]))
         inverse = np.linalg.inv(sigma[jdx])
-        p3 = np.log(prior[jdx])
+        logpost = np.log(prior[jdx])
 
         # ...evaluate each x*
         for i, x in enumerate(X):
-            delta = x - mu[jdx]
-            logProb[jdx][i] = p1 - (1/2) * np.dot(np.dot(delta, inverse), np.transpose(delta)) + p3
+            xminusmu = x - mu[jdx]
+            logProb[jdx][i] = halfdet - (1/2) * np.dot(np.dot(xminusmu, inverse), np.transpose(xminusmu)) + logpost
     # ==========================
     
     # one possible way of finding max a-posteriori once
@@ -140,10 +140,10 @@ class BayesClassifier(object):
 # Call `genBlobs` and `plotGaussian` to verify your estimates.
 
 
-X, labels = genBlobs(centers=5)
+'''X, labels = genBlobs(centers=5)
 mu, sigma = mlParams(X,labels)
 plotGaussian(X,labels,mu,sigma)
-
+'''
 
 # Call the `testClassifier` and `plotBoundary` functions for this part.
 
@@ -152,11 +152,11 @@ testClassifier(BayesClassifier(), dataset='iris', split=0.7)
 
 
 
-#testClassifier(BayesClassifier(), dataset='vowel', split=0.7)
+testClassifier(BayesClassifier(), dataset='vowel', split=0.7)
 
 
 
-#plotBoundary(BayesClassifier(), dataset='iris',split=0.7)
+plotBoundary(BayesClassifier(), dataset='iris',split=0.7)
 
 
 # ## Boosting functions to implement
