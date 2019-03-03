@@ -105,7 +105,7 @@ Trial | Accuracy
 80 | 86.7
 90 | 91.1
 
-*Final mean classification accuracy  89 with standard deviation 4.16
+*Final mean classification accuracy  89 with standard deviation 4.16*
 
 Plot boundary:
 
@@ -126,7 +126,7 @@ Trial | Accuracy
 80 | 62.3
 90 | 70.8
 
-*Final mean classification accuracy  64.7 with standard deviation 4.03
+*Final mean classification accuracy  64.7 with standard deviation 4.03*
 
 
 1) **When can a feature independence assumption be reasonable and when not?**
@@ -219,7 +219,7 @@ Trial | Accuracy
 80 | 01.1
 90 | 91.1
 
-*Final mean classification accuracy  93.4 with standard deviation 3.39
+*Final mean classification accuracy  93.4 with standard deviation 3.39*
 
 <p align="center"><img src="https://github.com/sork01/dd2421lab3/blob/master/ass5.png"></p>
 
@@ -238,7 +238,7 @@ Trial | Accuracy
 80 | 77.9
 90 | 78.6
 
-*Final mean classification accuracy  77.9 with standard deviation 3.44
+*Final mean classification accuracy  77.9 with standard deviation 3.44*
 
 
 1) Is there any improvement in classification accuracy? Why/why not?
@@ -279,7 +279,7 @@ Trial | Accuracy
 80 | 93.3
 90 | 88.9
 
-*Final mean classification accuracy  92.4 with standard deviation 3.71
+*Final mean classification accuracy  92.4 with standard deviation 3.71*
 
 <p align="center"><img src="https://github.com/sork01/dd2421lab3/blob/master/ass7_1.png"></p>
 
@@ -298,7 +298,7 @@ Trial | Accuracy
 80 | 97.8
 90 | 97.8
 
-*Final mean classification accuracy  94.2 with standard deviation 3.22
+*Final mean classification accuracy  94.2 with standard deviation 3.22*
 
 <p align="center"><img src="https://github.com/sork01/dd2421lab3/blob/master/ass7_2.png"></p>
 
@@ -317,7 +317,7 @@ Trial | Accuracy
 80 | 59.7
 90 | 68.2
 
-*Final mean classification accuracy  64.1 with standard deviation 4
+*Final mean classification accuracy  64.1 with standard deviation 4*
 
 
 ### Decision Tree Boosted Vowel
@@ -335,7 +335,7 @@ Trial | Accuracy
 80 | 83.8
 90 | 88.3
 
-*Final mean classification accuracy  86.4 with standard deviation 2.71
+*Final mean classification accuracy  86.4 with standard deviation 2.71*
 
 1) Is there any improvement in classification accuracy? Why/why not?
 
