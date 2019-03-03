@@ -359,26 +359,26 @@ Yes, boosting can increase accuracy of some models, in this case the vowels data
 
 ## Assignment 7
 
-** If you had to pick a classiﬁer, naive Bayes or a decision tree or the boosted versions of these, which one would you pick? Motivate from the following criteria: ** 
+**If you had to pick a classiﬁer, naive Bayes or a decision tree or the boosted versions of these, which one would you pick? Motivate from the following criteria:** 
 
 
 
-###Outliers
+### Outliers
     
 Naive bayes with no boosting since boosting will give larger weights to outliers and decision tree usually overfit the data
 
-###Irrelevant input
+### Irrelevant input
 
 Decision tree, pruning will remove most of the irrelevant input. However if the features are independent naive bayes would work aswell
 
-###Predictive power
+### Predictive power
 
 I'm guessing that it depends on if the features are independent or not. If the features are independent, Naive bayes would be best, if not Decision tree. Both boosted to get better accuracy
 
-###Mixed types of data
+### Mixed types of data
 
 Decision tree is more flexible when it comes to mixed type of data, using boosting would improve accuracy I think
 
-###Scalability 
+### Scalability 
 
 When the datasets gets bigger, there will probably be more and more non independent features so Decision tree would be better. No boosting since it would be too expensive.
