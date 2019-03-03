@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # coding: utf-8
 
 # # Lab 3: Bayes Classifier and Boosting
@@ -31,7 +31,7 @@ import random
 # NOTE: you do not need to handle the W argument for this part!
 # in: labels - N vector of class labels
 # out: prior - C x 1 vector of class priors
-def computePrior(labels, W=None):
+def computePrior(labels, W):
     Npts = labels.shape[0]
     if W is None:
         W = np.ones((Npts,1))/Npts
@@ -46,7 +46,8 @@ def computePrior(labels, W=None):
     # ==========================
     for jdx, c in enumerate(classes):
         idx = np.where(labels == c)[0]
-        prior[jdx] = len(idx) / len(labels)
+        xlw = W[idx]
+        prior[jdx] = np.sum(xlw) / np.sum(W)
     # ==========================
 
     return prior
@@ -56,7 +57,7 @@ def computePrior(labels, W=None):
 #     labels - N vector of class labels
 # out:    mu - C x d matrix of class means (mu[i] - class i mean)
 #      sigma - C x d x d matrix of class covariances (sigma[i] - class i sigma)
-def mlParams(X, labels, W=None):
+def mlParams(X, labels, W):
     assert(X.shape[0]==labels.shape[0])
     Npts,Ndims = np.shape(X)
     classes = np.unique(labels)
@@ -70,20 +71,23 @@ def mlParams(X, labels, W=None):
 
     # TODO: fill in the code to compute mu and sigma!
     # ==========================
+    
     for jdx, c in enumerate(classes):
-        idx = np.where(labels == c)[0]    # Vector of length C of indices for a given label class c
-        xlc = X[idx]                      # Matrix  C x d with samples in the class c
-        mu[jdx] = sum(xlc) / len(xlc)     # Compute mean
+        idx = np.where(labels == c)[0]                              # Vector of length C of indices for a given label class c
+        xlc = X[idx]                                                          # Matrix  C x d with samples in the class c
+        xlw = W[idx]
+        mu[jdx] = sum(xlw * xlc) / sum(xlw)                     # Compute mean
     for jdx, c in enumerate(classes):
-        idx = np.where(labels == c)[0]                # Vector of length C of indices for a given label class c
-        xlc = X[idx]                                  # Matrix  C x d with samples in the class c
-        x = xlc - mu[jdx]
-        mean = (1/(len(xlc))) * sum(np.square(x))
-        sigma[jdx] = np.diag(mean)                    # Use diagonal matrix for Naive Bayes Classier
+        idx = np.where(labels == c)[0]                           # Vector of length C of indices for a given label class c
+        xlc = np.array(X[idx])
+        xlw = W[idx]                                                     # Matrix  C x d with samples in the class c
+        u = np.array(mu[jdx])
+        x = xlc - u
+        mean = sum(xlw * np.square(x)) / sum(xlw)
+        sigma[jdx] = np.diag(mean)                              # Use diagonal matrix for Naive Bayes Classier
     # ==========================
-
+ 
     return mu, sigma
-
 
 # in:      X - N x d matrix of M data points
 #      prior - C x 1 matrix of class priors
@@ -104,7 +108,6 @@ def classifyBayes(X, prior, mu, sigma):
         inverse = np.linalg.inv(sigma[jdx])
         logpost = np.log(prior[jdx])
 
-        # ...evaluate each x*
         for i, x in enumerate(X):
             xminusmu = x - mu[jdx]
             logProb[jdx][i] = halfdet - (1/2) * np.dot(np.dot(xminusmu, inverse), np.transpose(xminusmu)) + logpost
@@ -128,7 +131,7 @@ class BayesClassifier(object):
         rtn = BayesClassifier()
         rtn.prior = computePrior(labels, W)
         rtn.mu, rtn.sigma = mlParams(X, labels, W)
-        rtn.trained = True
+        rtn.trained = True  
         return rtn
 
     def classify(self, X):
@@ -139,24 +142,25 @@ class BayesClassifier(object):
 # 
 # Call `genBlobs` and `plotGaussian` to verify your estimates.
 
+# print(mlParams(np.array([[0,1], [1,2],[3,4]]), np.array([0,0,1]), np.array([1.0/3.0] * 3)))
+# X, labels = genBlobs(centers=5)
+# test = np.array([1.0/len(X)] * len(X)).reshape(len(X),1)
+# mu, sigma = mlParams(X,labels, test)
+# plotGaussian(X,labels,mu,sigma)
 
-'''X, labels = genBlobs(centers=5)
-mu, sigma = mlParams(X,labels)
-plotGaussian(X,labels,mu,sigma)
-'''
 
 # Call the `testClassifier` and `plotBoundary` functions for this part.
 
 
-testClassifier(BayesClassifier(), dataset='iris', split=0.7)
+# testClassifier(BayesClassifier(), dataset='iris', split=0.7)
 
 
 
-testClassifier(BayesClassifier(), dataset='vowel', split=0.7)
+# testClassifier(BayesClassifier(), dataset='vowel', split=0.7)
 
 
 
-plotBoundary(BayesClassifier(), dataset='iris',split=0.7)
+# plotBoundary(BayesClassifier(), dataset='iris',split=0.7)
 
 
 # ## Boosting functions to implement
@@ -170,7 +174,7 @@ plotBoundary(BayesClassifier(), dataset='iris',split=0.7)
 #                   T - number of boosting iterations
 # out:    classifiers - (maximum) length T Python list of trained classifiers
 #              alphas - (maximum) length T Python list of vote weights
-def trainBoost(base_classifier, X, labels, T=10):
+def trainBoost(base_classifier, X, labels, T):
     # these will come in handy later on
     Npts,Ndims = np.shape(X)
 
@@ -187,9 +191,38 @@ def trainBoost(base_classifier, X, labels, T=10):
         # do classification for each point
         vote = classifiers[-1].classify(X)
 
+#1   Initially, Adaboost selects a training subset randomly.
+#2   It iteratively trains the AdaBoost machine learning model by selecting the training set based on the accurate prediction of the last training.
+#3   It assigns the higher weight to wrong classified observations so that in the next iteration these observations will get the high probability for classification.
+#4   Also, It assigns the weight to the trained classifier in each iteration according to the accuracy of the classifier. The more accurate classifier will get high weight.
+#5   This process iterate until the complete training data fits without any error or until reached to the specified maximum number of estimators.
+#6   To classify, perform a "vote" across all of the learning algorithms you built.
+
+
+# https://towardsdatascience.com/adaboost-for-dummies-breaking-down-the-math-and-its-equations-into-simple-terms-87f439757dcf
+
         # TODO: Fill in the rest, construct the alphas etc.
         # ==========================
+        # initialize all weights of your samples to 1 divided by number of training sample
+        ht = np.zeros((Npts,1))
+        weight = np.sum(wCur)
+        for i in range(Npts):
+            if (vote[i] == labels[i]):
+                ht[i] = 1
+            else:
+                ht[i] = 0
         
+        error = np.sum(wCur * (1 - ht))
+        alphat = 0.5 * np.log((1-error) - np.log(error)) 
+        alphas.append(alphat)
+        oldw = wCur
+        for i in range(Npts):
+            if (ht[i] == 1):
+                wCur[i] = oldw[i] * np.exp(-alphat)
+            else:
+                wCur[i] = oldw[i] * np.exp(alphat)            
+        
+       
         # alphas.append(alpha) # you will need to append the new alpha
         # ==========================
         
@@ -213,7 +246,10 @@ def classifyBoost(X, classifiers, alphas, Nclasses):
         # TODO: implement classificiation when we have trained several classifiers!
         # here we can do it by filling in the votes vector with weighted votes
         # ==========================
-        
+        for i in range(Ncomps):
+            test = classifiers[i].classify(X)
+            for j in range(Npts):
+                votes[j][test[j]] += alphas[i]
         # ==========================
 
         # one way to compute yPred after accumulating the votes
@@ -241,20 +277,21 @@ class BoostClassifier(object):
         return classifyBoost(X, self.classifiers, self.alphas, self.nbr_classes)
 
 
+
 # ## Run some experiments
 # 
 # Call the `testClassifier` and `plotBoundary` functions for this part.
 
 
-#testClassifier(BoostClassifier(BayesClassifier(), T=10), dataset='iris',split=0.7)
+# testClassifier(BoostClassifier(BayesClassifier(), T=10), dataset='iris',split=0.7)
 
 
 
-#testClassifier(BoostClassifier(BayesClassifier(), T=10), dataset='vowel',split=0.7)
+testClassifier(BoostClassifier(BayesClassifier(), T=10), dataset='vowel',split=0.7)
 
 
 
-#plotBoundary(BoostClassifier(BayesClassifier()), dataset='iris',split=0.7)
+# plotBoundary(BoostClassifier(BayesClassifier()), dataset='iris',split=0.7)
 
 
 # Now repeat the steps with a decision tree classifier.
