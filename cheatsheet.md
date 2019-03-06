@@ -1,5 +1,36 @@
 # Cheat-sheet Machine learning
 
+## Machine learning
+
+Is useful when a pattern exists and training data is available
+
+## Nearest Neighbour
+
+Find the nearest Neighbour and classify x to the same class
+
+### K-nearest neighbour rule
+
+Compute the distances to all the samples from new data x
+Pick k neighbours that are nearest to x
+Majority vote to classify point x (Nearest Neighbour is 1-NN)
+
+### K-NN vs 1-NN
+
+*the boundary becomes smoother as k increases*
+*lower computational cost for lower k*
+*k-NN better generalizes given many samples*
+
+### Pros
+
+*simple; only with a single parameter k*
+*applicable to multi-class problems*
+*good performance, effective in low dimension data*
+
+### Cons
+
+*costly to compute distances to search for the nearest*
+*memory requirement: must store all the training set*
+
 ## Decision Trees
 
 Tree models where the target variable can take a discrete set of values are called classification trees; in these tree structures, leaves represent class labels and branches represent conjunctions of features that lead to those class labels. Decision trees where the target variable can take continuous values (typically real numbers) are called regression trees.
