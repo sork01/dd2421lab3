@@ -62,6 +62,7 @@ p_i = probability of event i
 Entropy = Sum_for all i(-p_i * log2 * p_i) The result is called bit of information, i.e a fair coin toss would have 1 bit of information wheres a fair die would have 2.58 bits of information
 
 Information gain = entropy of entire set - entropy of a single feature in the subset where the feature exists
+infogain(dataset, rain) = entropy(dataset) - ((sizeof(dataset[rain == yes]) / sizeof(dataset)) * entropy(dataset[rain == yes]) + (sizeof(dataset[rain == no]) / sizeof(dataset)) * entropy(dataset[rain == no]))
 
 Gini-index = sum for all i(1-pi^2) also known as expected error rate at a node
 
