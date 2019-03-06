@@ -111,3 +111,10 @@ Lasso was introduced in order to improve the prediction accuracy and interpretab
 ## Perceptron Learning
 
 Method to find separating hyperplanes
+
+## RANSAC
+Random Sample Consensus is an iterative method to estimate parameters of a mathematical model from a set of observed data that contains outliers, when outliers are to be accorded no influence on the values of the estimates. Therefore, it also can be interpreted as an outlier detection method.
+
+## Projection Length
+
+A similarity measure in the subspace method
