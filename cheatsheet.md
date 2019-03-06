@@ -32,12 +32,22 @@ A latent variable is a hidden variable that are not directly observed, one advan
 
 All naive Bayes classifiers assume that the value of a particular feature is independent of the value of any other feature, given the class variable. For example, a fruit may be considered to be an apple if it is red, round, and about 10 cm in diameter. A naive Bayes classifier considers each of these features to contribute independently to the probability that this fruit is an apple, regardless of any possible correlations between the color, roundness, and diameter features.
 
+### Posterior probability
+
+A posterior probability, in Bayesian statistics, is the revised or updated probability of an event occurring after taking into consideration new information. Conditional probability taking into account the evidence
+
+
+
 ## Neural Networks
 
 ### Backpropagation
 
 Backpropagation is an advanced algorithm, driven by sophisticated mathematics, which allows us to adjust all the weights in our Neural Network.
 The key underlying principle of Backpropagation is that the structure of the algorithm allows for large numbers of weights to be adjusted simultaneously.
+
+### Dropout
+
+Dropout is when you're dropping out units in a neural network, ignoring units/neurons during the training phase at random to prevent overfitting.
 
 ## Support Vector Machines
 
@@ -79,3 +89,25 @@ Bias error is useful to quantify how much on an average are the predicted values
 ## Variance 
 
 Variance quantifies how the prediction made on same observation differs from each other. A high variance model will over-fit on your training population and perform badly on any observation beyond training.
+
+## The Subspace Method
+
+Principal Component Analysis (PCA) is by far one of the most popular algorithms for dimensionality reduction. Given a set of observations x , with dimension M, PCA is the standard technique for finding the single best subspace of a given dimension, m
+
+
+### K-fold cross validation
+
+Cross-validation is a statistical method used to estimate the skill of machine learning models. A technique for assessing a model while exploiting available data for training and testing
+
+### Curse of Dimensionality
+
+The problem is that when the dimensionality increases, the volume of the space increases so fast that the available data become sparse.
+
+### The Lasso
+
+Least Absolute Shrinkage and Selection Operator.
+Lasso was introduced in order to improve the prediction accuracy and interpretability of regression models by altering the model fitting process to select only a subset of the provided covariates for use in the final model rather than using all of them. An approach to regression that results in feature seletion
+
+## Perceptron Learning
+
+Method to find separating hyperplanes
