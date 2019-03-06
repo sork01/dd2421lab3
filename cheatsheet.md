@@ -4,6 +4,26 @@
 
 Is useful when a pattern exists and training data is available
 
+### Classification
+
+*Feature extraction*
+*Training/Testing*
+*Generalization* 
+
+### Overfitting
+
+When the learned models are overly specialized for the training samples which in turn means good results on training data but generalizes poorly.
+This occurs when:
+
+*Non-representative sample*
+*Noisy examples*
+*Too complex model*
+
+How to counter?:
+
+*Stop growing when data split not statistically significant*
+*Grow full tree, then post-prune (e.g. Reduced error pruning)*
+
 ## Nearest Neighbour
 
 Find the nearest Neighbour and classify x to the same class
@@ -36,6 +56,14 @@ Majority vote to classify point x (Nearest Neighbour is 1-NN)
 Tree models where the target variable can take a discrete set of values are called classification trees; in these tree structures, leaves represent class labels and branches represent conjunctions of features that lead to those class labels. Decision trees where the target variable can take continuous values (typically real numbers) are called regression trees.
 
 Information gain is used to decide which feature to split on at each step in building the tree. Simplicity is best, so we want to keep our tree small. 
+
+### Entropy and Information gain
+p_i = probability of event i
+Entropy = Sum_for all i(-p_i * log2 * p_i) The result is called bit of information, i.e a fair coin toss would have 1 bit of information wheres a fair die would have 2.58 bits of information
+
+Information gain = entropy of entire set - entropy of a single feature in the subset where the feature exists
+
+Gini-index = sum for all i(1-pi^2) also known as expected error rate at a node
 
 ### Pros
 
@@ -83,7 +111,7 @@ Dropout is when you're dropping out units in a neural network, ignoring units/ne
 ## Support Vector Machines
 
 Basic idea of support vector machines: just like 1-layer or multi-layer neural nets.
-Support vectors are the data points that lie closest to the decision surface (or hyperplane)which are the datapoints that are the most difficult to classify.
+Support vectors are the data points that lie closest to the decision surface (or hyperplane) which are the datapoints that are the most difficult to classify.
 SVMs maximize the margin around the separating hyperplane.
 The decision function is fully specified by a (usually very small) subset of training  samples, the support vectors.
 If a training sample has a high alpha value it means that that sample has a large influence on the resulting classifier.
