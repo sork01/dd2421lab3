@@ -9,7 +9,9 @@ Is useful when a pattern exists and training data is available
 ### Classification
 
 *Feature extraction*
+
 *Training/Testing*
+
 *Generalization* 
 
 Classification: y is discrete
@@ -20,6 +22,7 @@ Regression: y is continuous
 Discriminative:
   *learn the posterior P(y|x, D) directly*
   *examples: linear regression, logistic regression*
+  
 Generative:
   *learn a model of data generation: priors P(y|D) and likelihoods P(x|y, D)*
   *use Bayes rule to obtain posterior P(y|x, D)*
