@@ -4,11 +4,26 @@
 
 Is useful when a pattern exists and training data is available
 
-### Classification
+### Classification And Regression
+
+## Classification
 
 *Feature extraction*
 *Training/Testing*
 *Generalization* 
+
+Classification: y is discrete
+Regression: y is continuous
+
+### Discriminative vs Generative
+
+Discriminative:
+  *learn the posterior P(y|x, D) directly*
+  *examples: linear regression, logistic regression*
+Generative:
+  *learn a model of data generation: priors P(y|D) and likelihoods P(x|y, D)*
+  *use Bayes rule to obtain posterior P(y|x, D)*
+  *example: classification* 
 
 ### Overfitting
 
@@ -92,9 +107,21 @@ Gini-index = sum for all i(1-pi^2) also known as expected error rate at a node
 
 A latent variable is a hidden variable that are not directly observed, one advantage of using latent variables is that they can serve to reduce the dimensionality of data.
 
+### Covariance and Independence
+
+Covariance is "linear" dependency 
+
 ## Naive Bayes Classifier
 
 All naive Bayes classifiers assume that the value of a particular feature is independent of the value of any other feature, given the class variable. For example, a fruit may be considered to be an apple if it is red, round, and about 10 cm in diameter. A naive Bayes classifier considers each of these features to contribute independently to the probability that this fruit is an apple, regardless of any possible correlations between the color, roundness, and diameter features.
+
+### Bayes Rule
+
+P(x | y) ← Likelihood represents the probability of observing data x given the hypothesis y.
+P(y) ← Prior represents the knowledge on hypothesis y before any observation.
+P(y | x) ← Posterior represents the probability of hypothesis y after the data x has been observed.
+P(x) ← Evidence encodes the quality of the underlying model.
+
 
 ### Posterior probability
 
@@ -145,30 +172,6 @@ Boosting is an iterative technique which adjust the weight of an observation bas
 ### Stacking
 
 Use a learner to combine output from different learners. This can lead to decrease in either bias or variance error depending on the combining learner used.
-
-## Bias and Variance
-
-### The Bias-Variance Tradeoff
-
-Error due to Bias: the difference between the average (expected) prediction of our model and the correct value.
-Error due to Variance: the variability of a model prediction for a given data point between different realizations of the
-model.
-
-### Bias
-
-Bias error is useful to quantify how much on an average are the predicted values different from the actual value. A high bias error means we have a under-performing model which keeps on missing important trends.
-
-### Variance 
-
-Variance quantifies how the prediction made on same observation differs from each other. A high variance model will over-fit on your training population and perform badly on any observation beyond training.
-
-<p align="center"><img src="https://github.com/sork01/dd2421lab3/blob/master/cheat2.png"></p>
-
-Low model complexity => High Bias
-High model complexity => Low Bias
-Low model complexity => Low Variance
-High model complexity => High Variance
-
 
 ## The Subspace Method
 
