@@ -24,6 +24,9 @@ How to counter?:
 *Stop growing when data split not statistically significant*
 *Grow full tree, then post-prune (e.g. Reduced error pruning)*
 
+<p align="center"><img src="https://github.com/sork01/dd2421lab3/blob/master/cheat1.png"></p>
+
+
 ## Nearest Neighbour
 
 Find the nearest Neighbour and classify x to the same class
@@ -50,6 +53,7 @@ Majority vote to classify point x (Nearest Neighbour is 1-NN)
 
 *costly to compute distances to search for the nearest*
 *memory requirement: must store all the training set*
+*nearest neighbour is far away in higher dimensions* 
 
 ## Decision Trees
 
@@ -142,13 +146,29 @@ Boosting is an iterative technique which adjust the weight of an observation bas
 
 Use a learner to combine output from different learners. This can lead to decrease in either bias or variance error depending on the combining learner used.
 
-## Bias
+## Bias and Variance
+
+### The Bias-Variance Tradeoff
+
+Error due to Bias: the difference between the average (expected) prediction of our model and the correct value.
+Error due to Variance: the variability of a model prediction for a given data point between different realizations of the
+model.
+
+### Bias
 
 Bias error is useful to quantify how much on an average are the predicted values different from the actual value. A high bias error means we have a under-performing model which keeps on missing important trends.
 
-## Variance 
+### Variance 
 
 Variance quantifies how the prediction made on same observation differs from each other. A high variance model will over-fit on your training population and perform badly on any observation beyond training.
+
+<p align="center"><img src="https://github.com/sork01/dd2421lab3/blob/master/cheat2.png"></p>
+
+Low model complexity => High Bias
+High model complexity => Low Bias
+Low model complexity => Low Variance
+High model complexity => High Variance
+
 
 ## The Subspace Method
 
@@ -162,6 +182,7 @@ Cross-validation is a statistical method used to estimate the skill of machine l
 ### Curse of Dimensionality
 
 The problem is that when the dimensionality increases, the volume of the space increases so fast that the available data become sparse.
+Intuitions in low-dimentionality does not apply in high-dimensions 
 
 ### The Lasso
 
