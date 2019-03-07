@@ -15,6 +15,7 @@ Is useful when a pattern exists and training data is available
 *Generalization* 
 
 Classification: y is discrete
+
 Regression: y is continuous
 
 ### Discriminative vs Generative
