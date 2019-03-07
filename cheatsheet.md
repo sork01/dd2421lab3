@@ -153,6 +153,7 @@ A posterior probability, in Bayesian statistics, is the revised or updated proba
 
 Backpropagation is an advanced algorithm, driven by sophisticated mathematics, which allows us to adjust all the weights in our Neural Network.
 The key underlying principle of Backpropagation is that the structure of the algorithm allows for large numbers of weights to be adjusted simultaneously.
+Errors propagate backwards through the layers.
 
 ### Dropout
 
@@ -172,7 +173,10 @@ The idea is to gain linearly separation by mapping the data to a higher dimensio
 
 ### Kernel 
 
-writing here soon
+Kernels is used to "pretend" to transform the input data into a high-dimensional feature space!
+
+Utilize the advantages of a high-dimensional space without actually representing anything high-dimensional
+
 
 ## Ensemble Learning
 
@@ -191,7 +195,7 @@ Boosting is an iterative technique which adjust the weight of an observation bas
 
 Use a learner to combine output from different learners. This can lead to decrease in either bias or variance error depending on the combining learner used.
 
-## The Subspace Method
+### The Subspace Method
 
 Principal Component Analysis (PCA) is by far one of the most popular algorithms for dimensionality reduction. Given a set of observations x , with dimension M, PCA is the standard technique for finding the single best subspace of a given dimension, m
 
@@ -212,10 +216,33 @@ Lasso was introduced in order to improve the prediction accuracy and interpretab
 
 ## Perceptron Learning
 
-Method to find separating hyperplanes
+*Incremental learning*
+
+*Weights only change when the output is wrong*
+
+*Always converges if the problem is solvable*
+
+*Method to find separating hyperplanes*
 
 ## RANSAC
 Random Sample Consensus is an iterative method to estimate parameters of a mathematical model from a set of observed data that contains outliers, when outliers are to be accorded no influence on the values of the estimates. Therefore, it also can be interpreted as an outlier detection method.
+
+Ransac choses 2 random points and draws a line through them and gets all the datapoints within the threshold, rest is classified as outliers 
+
+Too large threshold will find all the datapoints, too low threshold will just get the 2 random samples
+
+~~~~
+
+Algorithm
+(i) Randomly select a (minimum number of) sample of s data points from S and instantiate the model from this subset.
+(ii) Determine the set of data points Si which are within a distance threshold t of the model. The set Si is the consensus set of
+samples and defines the inliers of S.
+(iii) If the subset of Si is greater than some threshold T, re-estimate the model using all the points in Si and terminate
+(iv) If the size of Si is less than T, select a new subset and repeat the above.
+(v) After N trials the largest consensus set Si is selected, and the model is re-estimated using all the points in the subset S
+
+~~~~
+
 
 ## Projection Length
 
