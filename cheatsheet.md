@@ -35,12 +35,15 @@ When the learned models are overly specialized for the training samples which in
 This occurs when:
 
 *Non-representative sample*
+
 *Noisy examples*
+
 *Too complex model*
 
 How to counter?:
 
 *Stop growing when data split not statistically significant*
+
 *Grow full tree, then post-prune (e.g. Reduced error pruning)*
 
 <p align="center"><img src="https://github.com/sork01/dd2421lab3/blob/master/cheat1.png"></p>
@@ -53,25 +56,33 @@ Find the nearest Neighbour and classify x to the same class
 ### K-nearest neighbour rule
 
 Compute the distances to all the samples from new data x
+
 Pick k neighbours that are nearest to x
+
 Majority vote to classify point x (Nearest Neighbour is 1-NN)
 
 ### K-NN vs 1-NN
 
 *the boundary becomes smoother as k increases*
+
 *lower computational cost for lower k*
+
 *k-NN better generalizes given many samples*
 
 ### Pros
 
 *simple; only with a single parameter k*
+
 *applicable to multi-class problems*
+
 *good performance, effective in low dimension data*
 
 ### Cons
 
 *costly to compute distances to search for the nearest*
+
 *memory requirement: must store all the training set*
+
 *nearest neighbour is far away in higher dimensions* 
 
 ## Decision Trees
@@ -122,8 +133,11 @@ All naive Bayes classifiers assume that the value of a particular feature is ind
 ### Bayes Rule
 
 P(x | y) ← Likelihood represents the probability of observing data x given the hypothesis y.
+
 P(y) ← Prior represents the knowledge on hypothesis y before any observation.
+
 P(y | x) ← Posterior represents the probability of hypothesis y after the data x has been observed.
+
 P(x) ← Evidence encodes the quality of the underlying model.
 
 
