@@ -4,9 +4,9 @@
 
 Is useful when a pattern exists and training data is available
 
-### Classification And Regression
+## Classification And Regression
 
-## Classification
+### Classification
 
 *Feature extraction*
 *Training/Testing*
